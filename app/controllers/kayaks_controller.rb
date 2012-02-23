@@ -1,0 +1,3 @@
+class KayaksController < ApplicationController
+
+end
