@@ -17,12 +17,9 @@ role :app, "kayak.test"
 role :web, "kayak.test"
 role :db,  "kayak.test", :primary => true
 
-task :start do
-  run "unicorn -c /etc/unicorn/kayak.conf.rb -D"
-end
-
-namespace :bundle do
-  task :install do
-    run "cd /u/apps/kayak/current && bundle install --gemfile /u/apps/kayak/current/Gemfile --path /u/apps/kayak/shared/bundle --deployment --without development test"
+namespace :unicorn do
+  desc "Start unicorn for this application"
+  task :start do
+    run "cd #{current_path} && bundle exec unicorn -c /etc/unicorn/kayak.conf.rb -D"
   end
 end
