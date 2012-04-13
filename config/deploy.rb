@@ -12,10 +12,16 @@ set :use_sudo, false
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+ssh_options[:keys] = [File.join(ENV["HOME"], ".vagrant.d", "insecure_private_key")]
 
 role :app, "kayak.test"
 role :web, "kayak.test"
 role :db,  "kayak.test", :primary => true
+
+after "deploy:setup" do
+  deploy.fast_git_setup.clone_repository
+  run "cd #{current_path} && bundle install"
+end
 
 namespace :unicorn do
   desc "Start unicorn for this application"
