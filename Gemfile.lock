@@ -1,3 +1,9 @@
+PATH
+  remote: vendor/fast_git_deploy-0.1.0
+  specs:
+    fast_git_deploy (0.1.0)
+      capistrano (>= 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -112,6 +118,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  fast_git_deploy (= 0.1.0)!
   rails (= 3.2.0)
   sqlite3
   therubyracer

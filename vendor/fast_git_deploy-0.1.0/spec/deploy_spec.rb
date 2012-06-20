@@ -3,7 +3,7 @@ require "spec_helper"
 describe "fast git deploy" do
   def cap_execute(command)
     commands = [
-      "--file", File.expand_path("#{File.dirname(__FILE__)}/Capfile"),
+      "--file", File.expand_path("../Capfile", __FILE__),
       "--quiet"
     ]
     commands.push command.split(" ")
@@ -35,5 +35,11 @@ describe "fast git deploy" do
     cap_execute "deploy:setup"
     cap_execute "deploy:cold"
     cap_execute "deploy:migrations"
+  end
+
+  it "should be able to upgrade via deploy:warm" do
+    cap_execute "deploy:setup -S disable_fast_git_deploy=true"
+    cap_execute "deploy:cold -S disable_fast_git_deploy=true"
+    cap_execute "deploy:warm"
   end
 end
