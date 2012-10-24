@@ -1,13 +1,14 @@
 require "bundler/capistrano"
-require 'fast_git_deploy/enable'
 
 set :application, "kayak"
-set :repository,  "http://github.com/jsierles/kayak.git"
+set :repository,  "https://github.com/jsierles/kayak.git"
+set :deploy_to, "/u/apps/#{application}"
+set :scm, :git
 
 set :user, "vagrant"
-set :use_sudo, false
-set :deploy_type, :deploy
 set :branch, "master"
+set :deploy_type, 'deploy'
+set :use_sudo, false
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
@@ -27,8 +28,4 @@ namespace :unicorn do
   task :start do
     run "cd #{current_path} && bundle exec unicorn -c /etc/unicorn/kayak.conf.rb -D"
   end
-end
-
-namespace :deploy do
-  task :create_symlink do; end
 end
