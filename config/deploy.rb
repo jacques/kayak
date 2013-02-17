@@ -30,3 +30,9 @@ namespace :unicorn do
     run "cd #{current_path} && bundle exec unicorn -c /etc/unicorn/kayak.conf.rb -D"
   end
 end
+
+namespace :deploy do
+  task :symlink do
+  # no-op to remove default symlink task, not needed by fast_git_deploy
+  end
+end
