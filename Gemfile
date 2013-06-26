@@ -13,4 +13,4 @@ group :development do
 end
 
 gem 'unicorn'
-gem 'capistrano'
+gem 'capistrano', '2.12.0'
